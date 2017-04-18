@@ -3,7 +3,7 @@ package aco_practica4;
 public class Primo {
     public static boolean esPrimo(int n, int m){
         int[] b = new int[m];
-        for(int j=0;0<b.length;j++){
+        for(int j=0;j<b.length;j++){
             b[j]= (int) Math.random()*((n-1)-2+1)+2;
         }
         for(int i =0; i<m;i++){
@@ -15,6 +15,7 @@ public class Primo {
                     int valor= mcd( ((int) Math.pow(b[i], k))-1,n);
                     if(1< valor && valor<n)return false;
                 }
+                j++;
             }
         }
         return true;
