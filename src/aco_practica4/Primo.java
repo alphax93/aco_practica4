@@ -9,13 +9,15 @@ public class Primo {
         for(int i =0; i<m;i++){
             if(Math.pow(b[i],(n-1))%n !=1) return false;
             int j=1;
-            while(j<n){
-                int k=(n-1)/ (int) Math.pow(2,j);
+            int tmp=(int) Math.pow(2,j);
+            while(tmp<n){
+                int k=(n-1)/tmp; 
                 if(k%1==0){
                     int valor= mcd( ((int) Math.pow(b[i], k))-1,n);
                     if(1< valor && valor<n)return false;
                 }
                 j++;
+                tmp=(int) Math.pow(2,j);
             }
         }
         return true;
