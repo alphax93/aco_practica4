@@ -17,16 +17,43 @@ public class PrimoBig {
            b[j]=((new BigDecimal(Math.random()).multiply((((new BigDecimal(n)).subtract(ONED).subtract(TWOD).add(ONED)).add(TWOD))))).toBigInteger();
         }
         for(int i =0; i<m;i++){
-            if(b[i].modPow(n.subtract(ONE),n)!=ONE) return false;
+            System.out.println(b[i]);
+            if(!b[i].modPow(n.subtract(ONE),n).equals(ONE)) return false;
+            System.out.println("OK");
             int j = 1;
             BigInteger tmp = TWO.pow(j);
             while(tmp.compareTo(n)==-1){
+                
                 BigInteger k = (n.subtract(ONE)).divide(tmp);
                 if(k.remainder(ONE).equals(ZERO)){
-                    
+                    BigInteger valor= mcd(pot(b[i],k).subtract(ONE),n);
+                    if(valor.compareTo(ONE)!=1 && valor.compareTo(n)!=-1)return false;
                 }
+                j++;
+                tmp=TWO.pow(j);
+                System.out.println("OK1");
             }
+            
         }
         return true;
     }
+    private static BigInteger mcd(BigInteger b, BigInteger n){
+        if(n.equals(ZERO)){
+            return b;
+        } else{
+            return mcd(n,b.remainder(n));
+        }
+    }
+    
+    private static BigInteger pot(BigInteger base, BigInteger exp){
+        BigInteger res = base;
+        BigInteger aux=exp.subtract(ONE);
+        while(!aux.equals(ZERO)){
+            res=res.multiply(base);
+            aux=aux.subtract(ONE);
+            
+        }
+        return res;
+    }
+    
 }

@@ -30,11 +30,14 @@ public class Main {
         }
         
         BigInteger a = new BigInteger("465675465116607065549");
-        BigInteger b = new BigInteger(64,new Random());
+        
         
         System.out.println("Big Integer = " + a);
-        System.out.println("Big Integer = " + b);
-        System.out.println("cccc" + ( new BigDecimal(Math.random())));
-        PrimoBig.primoBig(a,10);
+        
+        if(PrimoBig.primoBig(new BigInteger("11"),5)){
+            System.out.println("ES PRIMO");
+        } else{
+            System.out.println("ME CAGO EN TODO");
+        }
     }
 }
