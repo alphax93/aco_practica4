@@ -1,6 +1,9 @@
 package aco_practica4;
 
 import static aco_practica4.Primo.esPrimo;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Random;
 
 public class Main {
 
@@ -25,5 +28,13 @@ public class Main {
             i++;
             System.out.println("----------------------------------------------");
         }
+        
+        BigInteger a = new BigInteger("465675465116607065549");
+        BigInteger b = new BigInteger(64,new Random());
+        
+        System.out.println("Big Integer = " + a);
+        System.out.println("Big Integer = " + b);
+        System.out.println("cccc" + ( new BigDecimal(Math.random())));
+        PrimoBig.primoBig(a,10);
     }
 }
