@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import static java.math.BigInteger.ONE;
 import static java.math.BigInteger.ZERO;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PrimoBig {
     
@@ -16,34 +18,29 @@ public class PrimoBig {
         for(int j=0;j<b.length;j++){
            b[j]=((new BigDecimal(Math.random()).multiply((((new BigDecimal(n)).subtract(ONED).subtract(TWOD).add(ONED)).add(TWOD))))).toBigInteger();
         }
+        List<BigInteger> k = new ArrayList<>();
+        int j = 1;
+        BigInteger tmp = TWO.pow(j);
+        while(tmp.compareTo(n)==-1){
+            BigInteger aux= (n.subtract(ONE)).divide(tmp);
+            if(aux.remainder(ONE).equals(ZERO)){
+                k.add(aux);
+            }
+            j++;
+            tmp=TWO.pow(j);
+        }
         for(int i =0; i<m;i++){
-            System.out.println(b[i]);
+            
             if(!b[i].modPow(n.subtract(ONE),n).equals(ONE)) return false;
-            System.out.println("OK");
-            int j = 1;
-            BigInteger tmp = TWO.pow(j);
-            while(tmp.compareTo(n)==-1){
-                
-                BigInteger k = (n.subtract(ONE)).divide(tmp);
-                if(k.remainder(ONE).equals(ZERO)){
-                    BigInteger valor= mcd(pot(b[i],k).subtract(ONE),n);
-                    if(valor.compareTo(ONE)!=1 && valor.compareTo(n)!=-1)return false;
-                }
-                j++;
-                tmp=TWO.pow(j);
-                System.out.println("OK1");
+            for (BigInteger aux : k) {
+                BigInteger valor= pot(b[i],aux).subtract(ONE).gcd(n);
+                if(valor.compareTo(ONE)!=1 && valor.compareTo(n)!=-1)return false;   
             }
             
         }
         return true;
     }
-    private static BigInteger mcd(BigInteger b, BigInteger n){
-        if(n.equals(ZERO)){
-            return b;
-        } else{
-            return mcd(n,b.remainder(n));
-        }
-    }
+    
     
     private static BigInteger pot(BigInteger base, BigInteger exp){
         BigInteger res = base;
